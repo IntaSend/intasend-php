@@ -1,0 +1,70 @@
+<?php
+namespace IntaSend\IntaSendPHP;
+
+use IntaSend\IntaSendPHP\Traits\BaseAPITrait;
+
+class Wallet  
+{
+    use BaseAPITrait;
+
+    public function init($credentials)
+    {
+        $this->credentials=$credentials;
+    }
+
+    public function details($wallet_id)
+    {
+        return $this->send_request('GET','/wallets/'.$wallet_id);
+    }
+
+    public function create($currency)
+    {
+        $payload=[
+            'wallet_type'=> 'WORKING',
+            'currency'=> $currency
+        ];
+        $payload=json_encode($payload);
+        return $this->send_request('POST','/wallets/',$payload);
+    }
+
+    public function retrieve($wallet_id=null){
+        if ($wallet_id) {
+           return $this->details($wallet_id);
+        }
+        return $this->send_request('GET','/wallets/');
+    }
+
+    public function transactions($wallet_id)
+    {
+        return $this->send_request('GET','/wallets/'.$wallet_id.'/transactions');
+    }
+
+    public function intra_transfer( $origin_id, $destination_id, $amount, $narrative)
+    {
+        $payload = [
+            "wallet_id"=> $destination_id,
+            "amount"=> $amount,
+            "narrative"=> $narrative
+        ];
+        $payload=json_encode($payload);
+        return $this->send_request('POST','/wallets/'.$origin_id.'/intra_transfer/',$payload);
+    }
+
+    public function fund($wallet_id, $phone_number, $email=null, $amount, $narrative, $currency="KES", $api_ref="API Request", $name=null)
+    {
+        $payload = [
+            'wallet_id'=> $wallet_id,
+            'public_key'=> $this->credentials['publishable_key'],
+            'currency'=> $currency,
+            'method'=> "M-PESA",
+            'amount'=> $amount,
+            'phone_number'=> $phone_number,
+            'api_ref'=> $api_ref,
+            'name'=> $name,
+            'email'=> $email
+        ];
+        $payload=json_encode($payload);
+        return $this->send_request('POST','/payment/collection/',$payload);
+    }
+
+}
