@@ -50,21 +50,10 @@ class Wallet
         return $this->send_request('POST','/wallets/'.$origin_id.'/intra_transfer/',$payload);
     }
 
-    public function fund($wallet_id, $phone_number, $email=null, $amount, $narrative, $currency="KES", $api_ref="API Request", $name=null)
+    public function fund($phone_number, $email=null, $amount, $method, $narrative, $currency="KES", $api_ref="API Request", $name=null)
     {
-        $payload = [
-            'wallet_id'=> $wallet_id,
-            'public_key'=> $this->credentials['publishable_key'],
-            'currency'=> $currency,
-            'method'=> "M-PESA",
-            'amount'=> $amount,
-            'phone_number'=> $phone_number,
-            'api_ref'=> $api_ref,
-            'name'=> $name,
-            'email'=> $email
-        ];
-        $payload=json_encode($payload);
-        return $this->send_request('POST','/payment/collection/',$payload);
+        $collection=new Collection();
+        return $collection->create($this->credentials['publishable_key'],$currency,$method,$amount,$phone_number,$api_ref,$name,$email);
     }
 
 }

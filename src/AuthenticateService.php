@@ -25,7 +25,7 @@ class AuthenticateService
         $public_key_pem = $details['key'];
         return [
             'private_key'=>$private_key_pem,
-            'private_key'=>$public_key_pem
+            'public_key'=>$public_key_pem
         ];
     }
 }

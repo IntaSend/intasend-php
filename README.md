@@ -41,7 +41,7 @@ Checkout our [API documentation](https://developers.intasend.com/) for more deta
     print_r(response);
 
     # Fund specific wallet
-    $response = $wallet->fund(<wallet_id>, <phone_number>, <email>, <amount>, <narrative>, <currency>, $api_ref>, <name>)
+    $response = $wallet->fund(<phone_number>, <email>, <amount>, <method>, <narrative>, <currency>, $api_ref>, <name>)
     print_r(response);
 
     # Wallet to wallet transfers
@@ -121,4 +121,25 @@ Checkout our [API documentation](https://developers.intasend.com/) for more deta
     print_r(response);
 
     $response = $paymentLink->details(<link_id>)
+    print_r(response);
+
+    # Payment Collection(M-Pesa)
+    use IntaSend\IntaSendPHP\Collection;
+
+    $credentials=[
+        'token'=>'<YOUR-TOKEN-HERE>',
+        'publishable_key'=>'<YOUR-PUBLISHABLE_KEY-HERE>',
+        'private_key'=><<<EOD
+        <YOUR-PRIVATE_KEY>
+        EOD,
+        'test'=>true,
+    ];
+
+    $collection = new Collection();
+    $collection->init($credentials);
+
+    $response = $collection->create(<publishable_key>,<currency>,<method>,<amount>,<phone_number>,<api_ref>,<name>,<email>);
+    print_r(response);
+
+    $response = $collection->status(<public_key>, <invoice_id>)
     print_r(response);
