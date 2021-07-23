@@ -11,7 +11,7 @@ Checkout our [API documentation](https://developers.intasend.com/) for more deta
 
 ## Examples
 
-    # Remember to switch of test when going live by removing the flag or set it to False
+    # Remember to switch of test when going live by set it to False
 
     # Wallets Management
     use IntaSend\IntaSendPHP\Wallet;
@@ -25,23 +25,23 @@ Checkout our [API documentation](https://developers.intasend.com/) for more deta
     $wallet=new Wallet();
     $wallet->init($credentials);
 
-    response = $wallet->retrieve()
+    $response = $wallet->retrieve()
     print_r(response);
 
-    response = $wallet->details(<WALLET-ID>)
+    $response = $wallet->details(<WALLET-ID>)
     print_r(response);
 
-    response = $wallet->transactions(<WALLET-ID>)
+    $response = $wallet->transactions(<WALLET-ID>)
     print_r(response);
     
-    response = $wallet->create("GBP")
+    $response = $wallet->create("GBP")
     print_r(response);
 
     # Fund specific wallet
-    response = $wallet->fund(<wallet_id>, <phone_number>, <email>, <amount>, <narrative>, <currency>, $api_ref>, <name>)
+    $response = $wallet->fund(<wallet_id>, <phone_number>, <email>, <amount>, <narrative>, <currency>, $api_ref>, <name>)
     print_r(response);
 
     # Wallet to wallet transfers
-    response = $wallet->intra_transfer(<WALLET-ID-1>, <WALLET-ID-2>, 1, "Charge capture")
+    $response = $wallet->intra_transfer(<WALLET-ID-1>, <WALLET-ID-2>, 1, "Charge capture")
     print_r(response);
 
