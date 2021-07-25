@@ -1,5 +1,7 @@
 # IntaSend Payments Gateway - PHP SDK
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/1706c482fda1458b97f5ba50f0566a3b)](https://app.codacy.com/gh/IntaSend/intasend-php?utm_source=github.com&utm_medium=referral&utm_content=IntaSend/intasend-php&utm_campaign=Badge_Grade_Settings)
+
 ## Official documentation
 
 Checkout our [API documentation](https://developers.intasend.com/) for more details and for payload references.
