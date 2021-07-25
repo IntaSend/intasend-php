@@ -8,8 +8,7 @@ Checkout our [API documentation](https://developers.intasend.com/) for more deta
 
     composer require intasend/intasend-php
 
-
-## Examples
+## How to use
 
     # Remember to switch of test when going live by set it to False
 
@@ -41,7 +40,7 @@ Checkout our [API documentation](https://developers.intasend.com/) for more deta
     print_r(response);
 
     # Fund specific wallet
-    $response = $wallet->fund(<phone_number>, <email>, <amount>, <method>, <narrative>, <currency>, $api_ref>, <name>)
+    $response = $wallet->fund(<phone_number>, <email>, <amount>, <method>, <currency>, $api_ref>, <name>)
     print_r(response);
 
     # Wallet to wallet transfers

@@ -50,7 +50,7 @@ class Wallet
         return $this->send_request('POST','/wallets/'.$origin_id.'/intra_transfer/',$payload);
     }
 
-    public function fund($phone_number, $email=null, $amount, $method, $narrative, $currency="KES", $api_ref="API Request", $name=null)
+    public function fund($phone_number, $email=null, $amount, $method, $currency="KES", $api_ref="API Request", $name=null)
     {
         $collection=new Collection();
         return $collection->create($this->credentials['publishable_key'],$currency,$method,$amount,$phone_number,$api_ref,$name,$email);

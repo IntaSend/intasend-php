@@ -1,6 +1,8 @@
 <?php
 namespace IntaSend\IntaSendPHP\Traits;
 
+use GuzzleHttp\Client;
+
 trait BaseAPITrait
 {
     private $credentials;
@@ -15,32 +17,19 @@ trait BaseAPITrait
 
     private function send_request($method,$url,$payload = null)
     {
-        $curl = curl_init();
+        $headers=[
+            'Authorization' => 'Bearer '.$this->credentials['token'],
+            'Content-Type' => 'application/json'
+        ];
 
-        curl_setopt_array($curl, array(
-        CURLOPT_URL => $this->base_url().$url,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => $method,
-        CURLOPT_POSTFIELDS =>$payload,
-        CURLOPT_HTTPHEADER => array(
-            "Authorization:Bearer ".$this->credentials['token'],
-            "Content-Type: application/json"
-        ),
-        ));
+        $client = new Client();
 
-        try {
-            $response = curl_exec($curl);
-            $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-            curl_close($curl);
-            $response=json_decode($response);
-            return $response;
-        } catch (\Throwable $th) {
-            return $th;
-        }
+        $response = $client->request($method, $this->base_url().$url, [
+            'body' => $payload,
+            'headers' => $headers
+        ]);
+
+        $response=json_decode($response->getBody()->getContents());
+        return $response;
     }
 }
