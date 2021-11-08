@@ -8,8 +8,8 @@ class AuthenticateService
     {
 
         $binary_signature = "";
-
-        openssl_sign($data, $binary_signature, $private_key, OPENSSL_ALGO_SHA1);
+        $pkeyid = openssl_get_privatekey($private_key);
+        openssl_sign($data, $binary_signature, $pkeyid, OPENSSL_ALGO_SHA1);
         return $binary_signature;
     }
 
