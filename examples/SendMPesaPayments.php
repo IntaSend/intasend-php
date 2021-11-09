@@ -1,7 +1,5 @@
 <?php
-namespace plugin;
-
-require_once 'vendor/autoload.php';
+namespace examples;
 
 use IntaSend\IntaSendPHP\Transfer;
 
@@ -41,8 +39,5 @@ $transfer->init($credentials);
 
 
 $response=$transfer->mpesa('WVYBVQ4', "KES",$transactions);
-print_r($response);
-print_r("Call approve");
 $response = $transfer->approve($response);
-print_r($response);
 
