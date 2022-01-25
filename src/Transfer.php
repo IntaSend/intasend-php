@@ -12,14 +12,15 @@ class Transfer
         $this->credentials=$credentials;
     }
 
-    public function send_money($device_id, $provider, $currency, $transactions, $callback_url=null)
+    public function send_money($device_id, $provider, $currency, $transactions, $callback_url=null, $wallet_id=null)
     {
         $payload=[
             'device_id'=> $device_id,
             'provider'=> $provider,
             'currency'=> $currency,
             'transactions'=> $transactions,
-            'callback_url'=> $callback_url
+            'callback_url'=> $callback_url,
+            'wallet_id' => $wallet_id
         ];
         $payload=json_encode($payload);
         return $this->send_request('POST','/send-money/initiate/',$payload);
