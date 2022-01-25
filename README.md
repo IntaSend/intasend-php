@@ -38,7 +38,7 @@ Checkout our [API documentation](https://developers.intasend.com/) for more deta
     $response = $wallet->transactions('<wallet_id>')
     print_r(response);
     
-    $response = $wallet->create("<currency>")
+    $response = $wallet->create("<currency>", "<label>")
     print_r(response);
 
     # Fund specific wallet
