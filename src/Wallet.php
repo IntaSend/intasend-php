@@ -17,11 +17,13 @@ class Wallet
         return $this->send_request('GET','/wallets/'.$wallet_id);
     }
 
-    public function create($currency)
+    public function create($currency, $label, $can_disburse=false)
     {
         $payload=[
             'wallet_type'=> 'WORKING',
-            'currency'=> $currency
+            'currency'=> $currency,
+            'label'=> $label,
+            'can_disburse'=> $can_disburse
         ];
         $payload=json_encode($payload);
         return $this->send_request('POST','/wallets/',$payload);
