@@ -139,8 +139,25 @@ Checkout our [API documentation](https://developers.intasend.com/) for more deta
     $collection = new Collection();
     $collection->init($credentials);
 
-    $response = $collection->create(<publishable_key>,<currency>,<method>,<amount>,<phone_number>,<api_ref>,<name>,<email>);
+    $response = $collection->create(<currency>,<method>,<amount>,<phone_number>,<api_ref>,<name>,<email>);
     print_r(response);
 
-    $response = $collection->status(<public_key>, <invoice_id>)
+    $response = $collection->status(<invoice_id>)
+    print_r(response);
+
+    # Checkout API
+    use IntaSend\IntaSendPHP\Checkout;
+
+    $credentials=[
+        'token'=>'<YOUR-TOKEN-HERE>',
+        'publishable_key'=>'<YOUR-PUBLISHABLE_KEY-HERE>',
+        'private_key'=><<<EOD
+        <YOUR-PRIVATE_KEY>
+        EOD,
+        'test'=>true,
+    ];
+
+    $checkout=new Checkout();
+    $checkout->init($credentials);
+    $response=$checkout->create(<amount>, <currency>, <email>, <first_name>, '<last_name>', '<country>', '<redirect_url>');
     print_r(response);

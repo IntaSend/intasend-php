@@ -12,10 +12,10 @@ class Collection
         $this->credentials=$credentials;
     }
 
-    public function create($public_key, $currency="KES", $method, $amount, $phone_number, $api_ref="API Request", $name=null, $email=null)
+    public function create($currency="KES", $method, $amount, $phone_number, $api_ref="API Request", $name=null, $email=null)
     {
         $payload=[
-            'public_key'=> $public_key,
+            'public_key'=> $this->credentials['publishable_key'],
             'currency'=> $currency,
             'method'=> $method,
             'amount'=> $amount,
@@ -28,10 +28,10 @@ class Collection
         return $this->send_request('POST','/payment/collection/',$payload);
     }
 
-    public function status($public_key, $invoice_id)
+    public function status($invoice_id)
     {
         $payload=[
-            'public_key'=> $public_key,
+            'public_key'=> $this->credentials['publishable_key'],
             'invoice_id'=> $invoice_id,
         ];
         $payload=json_encode($payload);
