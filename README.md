@@ -158,6 +158,9 @@ Checkout our [API documentation](https://developers.intasend.com/) for more deta
     ];
 
     $checkout=new Checkout();
+
     $checkout->init($credentials);
-    $response=$checkout->create(<amount>, <currency>, <email>, <first_name>, '<last_name>', '<country>', '<redirect_url>');
+
+    $response=$checkout->create<($amount=nullable>, $currency, <$email=nullable>, <$first_name=nullable>, <$last_name=nullable>, <$country=nullable>, $redirect_url, <$phone_number=nullable>, <$api_ref=nullable>, <$comment=nullable>, <$address=nullable>, <$city=nullable>, <$state=nullable>, <$method=nullable>, <$card_tarrif="BUSINESS-PAYS">, <$mobile_tarrif="BUSINESS-PAYS">);
+    
     print_r(response);
