@@ -1,8 +1,16 @@
 # IntaSend Laravel Playground
 
-## How to install
+## How to install IntaSend
+
+Use the command below to install the latest version of intasend-php plugin to your app.
 
     composer require intasend/intasend-php
+
+## How to run Playground and examples
+
+    composer update
+
+    php artisan serve
 
 ## How to collect payments
 
