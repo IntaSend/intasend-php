@@ -12,6 +12,10 @@ Navigate to `routes/web.php` for full code example
 
 Include IntaSend Checkout service
 
+    use IntaSend\IntaSendPHP\Checkout;
+
+Use it in route i.e where users can generate the check-out url
+
     Route::get('/', function () {
         $credentials = [
             'publishable_key' => 'ISPubKey_test_d798a963-fdbc-48aa-aeaa-6b14345a10d8',
