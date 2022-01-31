@@ -1,0 +1,10 @@
+{
+    "require": {
+        "intasend/intasend-php": "^1.0"
+    },
+    "autoload" : {
+        "classmap" : [
+            "./"
+        ]
+    }
+}
