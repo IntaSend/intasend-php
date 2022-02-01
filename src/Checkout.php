@@ -48,6 +48,7 @@ class Checkout
             "checkout_id" => $checkout_id,
             "tracking_id" => $tracking_id
         ];
+        $payload = json_encode($payload);
         return $this->send_request('POST', '/payment/status/', $payload);
     }
 }

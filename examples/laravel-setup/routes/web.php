@@ -59,7 +59,13 @@ Route::get('/callback', function (Request $request) {
     $checkout_id = $request->input('checkout_id');
     $tracking_id = $request->input('tracking_id');
 
+    $credentials = [
+        'publishable_key' =>  env('INTASEND_PUBLISHABLE_KEY'),
+        'token' =>  env('INTASEND_API_KEY'),
+        'test' =>  env('INTASEND_TEST_ENVIRONMENT', true),
+    ];
     $checkout = new Checkout();
+    $checkout->init($credentials);
     $resp = $checkout->check_status($signature, $checkout_id, $tracking_id);
 
     // Check the returned api_ref, verify state, amount, currency etc, and update your records accordingly
