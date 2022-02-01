@@ -71,5 +71,5 @@ Route::get('/callback', function (Request $request) {
 
     // Check the returned api_ref, verify state, amount, currency etc, and update your records accordingly
     print_r($resp);
-    return $resp;
+    return $resp->invoice->state;
 });
