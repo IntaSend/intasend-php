@@ -1,6 +1,7 @@
 <?php
 
 use IntaSend\IntaSendPHP\Checkout;
+use IntaSend\IntaSendPHP\Customer;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,21 +17,30 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $credentials = [
-        'publishable_key' => 'ISPubKey_test_d798a963-fdbc-48aa-aeaa-6b14345a10d8',
-        'token' => "129e5c9c765db4b42d0b5a25ad8ed626c6642bd7ce9697368529cb2b3fa0e1ea",
-        'test' => true,
+        'publishable_key' =>  env('INTASEND_PUBLISHABLE_KEY'),
+        'token' =>  env('INTASEND_API_KEY'),
+        'test' =>  env('INTASEND_TEST_ENVIRONMENT', true),
     ];
 
-    $checkout = new Checkout();
-
-    $checkout->init($credentials);
+    $customer = new Customer();
+    $customer->first_name = "Joe";
+    $customer->last_name = "Doe";
+    $customer->email = "joe@doe.com";
+    $customer->country = "KE";
+    $customer->city = "Nairobi";
+    $customer->address = "Apt 123, Westland road";
+    $customer->zipcode = "0100";
+    $customer->state = "Nairobi";
 
     $amount = 10;
     $currency = "KES";
-    $email = "joe@doe.com";
     $redirect_url = "https://example.com";
-    $resp = $checkout->create($amount = $amount, $currency, $email = $email, $first_name = null, $last_name = null, $country = null, $redirect_url, $phone_number = null, $api_ref = null, $comment = null, $address = null, $city = null, $state = null, $method = null, $card_tarrif = "BUSINESS-PAYS", $mobile_tarrif = "BUSINESS-PAYS");
-   
-    print_r($resp);
+    $ref_order_number = "test-order-10";
+
+
+    $checkout = new Checkout();
+    $checkout->init($credentials);
+    $resp = $checkout->create($amount, $currency, $customer, $redirect_url = $redirect_url, $api_ref = $ref_order_number);
+
     return redirect($resp->url);
 });
