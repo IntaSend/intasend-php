@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Http\Request;
 use IntaSend\IntaSendPHP\Checkout;
 use IntaSend\IntaSendPHP\Customer;
 use Illuminate\Support\Facades\Route;
@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/checkout', function () {
     $credentials = [
         'publishable_key' =>  env('INTASEND_PUBLISHABLE_KEY'),
         'token' =>  env('INTASEND_API_KEY'),
@@ -34,13 +34,35 @@ Route::get('/', function () {
 
     $amount = 10;
     $currency = "KES";
-    $redirect_url = "https://example.com";
+
+    // Add redirect url where the user will be redirected on success
+    $redirect_url = "https://example.com/callback";
     $ref_order_number = "test-order-10";
 
 
     $checkout = new Checkout();
     $checkout->init($credentials);
-    $resp = $checkout->create($amount = $amount, $currency = $currency, $customer = $customer, $redirect_url = $redirect_url, $api_ref = $ref_order_number);
+    $resp = $checkout->create($amount = $amount, $currency = $currency, $customer = $customer, $redirect_url = $redirect_url, $api_ref = $ref_order_number, $comment = null, $method = null);
 
     return redirect($resp->url);
+});
+
+/**
+ * When using the redirect URL, IntaSend will append additional parameters to your URL to help you verify the 
+ * request and update your records. The signature expires after 10 mins, consider updating your record once you
+ * receive it.
+ * 
+ * Example: How to returned signature and payment status
+ */
+Route::get('/callback', function (Request $request) {
+    $signature = $request->input('signature');
+    $checkout_id = $request->input('checkout_id');
+    $tracking_id = $request->input('tracking_id');
+
+    $checkout = new Checkout();
+    $resp = $checkout->check_status($signature, $checkout_id, $tracking_id);
+
+    // Check the returned api_ref, verify state, amount, currency etc, and update your records accordingly
+    print_r($resp);
+    return $resp;
 });

@@ -18,28 +18,60 @@ Example on how to generate payment secure URL and handle payment confirmation an
 
 Navigate to `routes/web.php` for full code example
 
-Include IntaSend Checkout service
+Include IntaSend Checkout and Customer class
 
     use IntaSend\IntaSendPHP\Checkout;
+    use IntaSend\IntaSendPHP\Customer;
 
 Use it in route i.e where users can generate the check-out url
 
-    Route::get('/', function () {
+    Route::get('/checkout', function () {
         $credentials = [
-            'publishable_key' => 'ISPubKey_test_d798a963-fdbc-48aa-aeaa-6b14345a10d8',
-            'token' => "129e5c9c765db4b42d0b5a25ad8ed626c6642bd7ce9697368529cb2b3fa0e1ea",
-            'test' => true,
+            'publishable_key' =>  env('INTASEND_PUBLISHABLE_KEY'),
+            'token' =>  env('INTASEND_API_KEY'),
+            'test' =>  env('INTASEND_TEST_ENVIRONMENT', true),
         ];
 
-        $checkout = new Checkout();
-
-        $checkout->init($credentials);
+        $customer = new Customer();
+        $customer->first_name = "Joe";
+        $customer->last_name = "Doe";
+        $customer->email = "joe@doe.com";
+        $customer->country = "KE";
+        $customer->city = "Nairobi";
+        $customer->address = "Apt 123, Westland road";
+        $customer->zipcode = "0100";
+        $customer->state = "Nairobi";
 
         $amount = 10;
         $currency = "KES";
-        $email = "joe@doe.com";
-        $redirect_url = "https://example.com";
-        $resp = $checkout->create($amount = $amount, $currency, $email = $email, $first_name = null, $last_name = null, $country = null, $redirect_url, $phone_number = null, $api_ref = null, $comment = null, $address = null, $city = null, $state = null, $method = null, $card_tarrif = "BUSINESS-PAYS", $mobile_tarrif = "BUSINESS-PAYS");
-    
+
+        // Add redirect url where the user will be redirected on success
+        $redirect_url = "https://example.com/callback";
+        $ref_order_number = "test-order-10";
+
+
+        $checkout = new Checkout();
+        $checkout->init($credentials);
+        $resp = $checkout->create($amount = $amount, $currency = $currency, $customer = $customer, $redirect_url = $redirect_url, $api_ref = $ref_order_number, $comment = null, $method = null);
+
         return redirect($resp->url);
     });
+
+## How to handle returned callback on success
+
+Successful transactions will return a callback with extra parameters if a `$redirect_url` is specified during the checkout  request. Below is an example of how to use the returned values to verify the transaction before updating your record.
+
+    Route::get('/callback', function (Request $request) {
+        $signature = $request->input('signature');
+        $checkout_id = $request->input('checkout_id');
+        $tracking_id = $request->input('tracking_id');
+
+        $checkout = new Checkout();
+        $resp = $checkout->check_status($signature, $checkout_id, $tracking_id);
+
+        // Check the returned api_ref, verify state, amount, currency etc, and update your records accordingly
+        print_r($resp);
+        return $resp;
+    });
+
+See the example in `routes/web.php` for more details.

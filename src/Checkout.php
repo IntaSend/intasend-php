@@ -14,7 +14,7 @@ class Checkout
         $this->credentials = $credentials;
     }
 
-    public function create($amount, $currency, Customer $customer, ?string $redirect_url, ?string $api_ref , ?string $comment, ?string $method, $card_tarrif = "BUSINESS-PAYS", $mobile_tarrif = "BUSINESS-PAYS",)
+    public function create($amount, $currency, Customer $customer, ?string $redirect_url, ?string $api_ref, ?string $comment, ?string $method, $card_tarrif = "BUSINESS-PAYS", $mobile_tarrif = "BUSINESS-PAYS",)
     {
         $payload = [
             "public_key" => $this->credentials['publishable_key'],
@@ -38,5 +38,16 @@ class Checkout
         ];
         $payload = json_encode($payload);
         return $this->send_request('POST', '/checkout/', $payload);
+    }
+
+    public function check_status($signature, $checkout_id, $tracking_id)
+    {
+
+        $payload = [
+            "signature" => $signature,
+            "checkout_id" => $checkout_id,
+            "tracking_id" => $tracking_id
+        ];
+        return $this->send_request('POST', '/payment/status/', $payload);
     }
 }
