@@ -40,13 +40,13 @@ class Checkout
         return $this->send_request('POST', '/checkout/', $payload);
     }
 
-    public function check_status($signature, $checkout_id, $tracking_id)
+    public function check_status($signature, $checkout_id, $invoice_id)
     {
 
         $payload = [
             "signature" => $signature,
             "checkout_id" => $checkout_id,
-            "tracking_id" => $tracking_id
+            "invoice_id" => $invoice_id
         ];
         $payload = json_encode($payload);
         return $this->send_request('POST', '/payment/status/', $payload);
