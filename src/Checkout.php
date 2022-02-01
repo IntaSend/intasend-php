@@ -36,6 +36,7 @@ class Checkout
             "card_tarrif" => $card_tarrif,
             "mobile_tarrif" => $mobile_tarrif
         ];
+        print_r($payload);
         $payload = json_encode($payload);
         return $this->send_request('POST', '/checkout/', $payload);
     }
