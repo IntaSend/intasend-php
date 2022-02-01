@@ -14,6 +14,29 @@ class Checkout
         $this->credentials = $credentials;
     }
 
+    private function getHost()
+    {
+        $possibleHostSources = array('HTTP_X_FORWARDED_HOST', 'HTTP_HOST', 'SERVER_NAME', 'SERVER_ADDR');
+        $sourceTransformations = array(
+            "HTTP_X_FORWARDED_HOST" => function ($value) {
+                $elements = explode(',', $value);
+                return trim(end($elements));
+            }
+        );
+        $host = '';
+        foreach ($possibleHostSources as $source) {
+            if (!empty($host)) break;
+            if (empty($_SERVER[$source])) continue;
+            $host = $_SERVER[$source];
+            if (array_key_exists($source, $sourceTransformations)) {
+                $host = $sourceTransformations[$source]($host);
+            }
+        }
+        // Remove port number from host
+        $host = preg_replace('/:\d+$/', '', $host);
+        return trim($host);
+    }
+
     public function create($amount, $currency, Customer $customer, ?string $redirect_url, ?string $api_ref, ?string $comment, ?string $method, $card_tarrif = "BUSINESS-PAYS", $mobile_tarrif = "BUSINESS-PAYS",)
     {
         $payload = [
@@ -34,7 +57,8 @@ class Checkout
             "api_ref" => $api_ref,
             "comment" => $comment,
             "card_tarrif" => $card_tarrif,
-            "mobile_tarrif" => $mobile_tarrif
+            "mobile_tarrif" => $mobile_tarrif,
+            "host" => $this->getHost()
         ];
         $payload = json_encode($payload);
         return $this->send_request('POST', '/checkout/', $payload);
