@@ -889,12 +889,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/IntaSend/intasend-php.git",
-                "reference": "fb84051fc2bb9b72f6b1a192ba93b63f9eafee39"
+                "reference": "3a43d42cf51bf11de61b29b8a8da41f9a5cc3295"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/IntaSend/intasend-php/zipball/fb84051fc2bb9b72f6b1a192ba93b63f9eafee39",
-                "reference": "fb84051fc2bb9b72f6b1a192ba93b63f9eafee39",
+                "url": "https://api.github.com/repos/IntaSend/intasend-php/zipball/3a43d42cf51bf11de61b29b8a8da41f9a5cc3295",
+                "reference": "3a43d42cf51bf11de61b29b8a8da41f9a5cc3295",
                 "shasum": ""
             },
             "require": {
@@ -926,7 +926,7 @@
                 "issues": "https://github.com/IntaSend/intasend-php/issues",
                 "source": "https://github.com/IntaSend/intasend-php/tree/dev"
             },
-            "time": "2022-02-01T10:27:03+00:00"
+            "time": "2022-02-01T10:42:03+00:00"
         },
         {
             "name": "laravel/framework",

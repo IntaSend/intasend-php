@@ -14,7 +14,7 @@ class Checkout
         $this->credentials = $credentials;
     }
 
-    public function create($amount, $currency, Customer $customer, $card_tarrif = "BUSINESS-PAYS", $mobile_tarrif = "BUSINESS-PAYS",?string $redirect_url, ?string $api_ref , ?string $comment, ?string $method)
+    public function create($amount, $currency, Customer $customer, ?string $redirect_url, ?string $api_ref , ?string $comment, ?string $method, $card_tarrif = "BUSINESS-PAYS", $mobile_tarrif = "BUSINESS-PAYS",)
     {
         $payload = [
             "public_key" => $this->credentials['publishable_key'],
