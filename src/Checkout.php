@@ -3,6 +3,7 @@
 namespace IntaSend\IntaSendPHP;
 
 use IntaSend\IntaSendPHP\Traits\BaseAPITrait;
+use IntaSend\IntaSendPHP\Customer;
 
 class Checkout
 {
@@ -13,7 +14,7 @@ class Checkout
         $this->credentials = $credentials;
     }
 
-    public function create($amount, $currency, $customer, $card_tarrif = "BUSINESS-PAYS", $mobile_tarrif = "BUSINESS-PAYS", $redirect_url = null, $api_ref = null, $comment = null, $method = null)
+    public function create($amount, $currency, Customer $customer, $card_tarrif = "BUSINESS-PAYS", $mobile_tarrif = "BUSINESS-PAYS",?string $redirect_url, ?string $api_ref , ?string $comment, ?string $method)
     {
         $payload = [
             "public_key" => $this->credentials['publishable_key'],

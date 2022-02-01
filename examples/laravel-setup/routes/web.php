@@ -40,7 +40,7 @@ Route::get('/', function () {
 
     $checkout = new Checkout();
     $checkout->init($credentials);
-    $resp = $checkout->create($amount, $currency, $customer, $redirect_url = $redirect_url, $api_ref = $ref_order_number);
+    $resp = $checkout->create($amount = $amount, $currency = $currency, $customer = $customer, $redirect_url = $redirect_url, $api_ref = $ref_order_number);
 
     return redirect($resp->url);
 });
