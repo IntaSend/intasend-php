@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4066b4bb9f8b9131a1ac690402234964",
+    "content-hash": "00aa18357f0d8bd21ee3aa78ca7582bb",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -885,16 +885,16 @@
         },
         {
             "name": "intasend/intasend-php",
-            "version": "v1.0.2",
+            "version": "dev-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/IntaSend/intasend-php.git",
-                "reference": "15dbb58e9c57c7af425b9856eeacc92b0fc9a6c5"
+                "reference": "36e45c4c7e84c50cc0c546365e3301f07b1152b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/IntaSend/intasend-php/zipball/15dbb58e9c57c7af425b9856eeacc92b0fc9a6c5",
-                "reference": "15dbb58e9c57c7af425b9856eeacc92b0fc9a6c5",
+                "url": "https://api.github.com/repos/IntaSend/intasend-php/zipball/36e45c4c7e84c50cc0c546365e3301f07b1152b2",
+                "reference": "36e45c4c7e84c50cc0c546365e3301f07b1152b2",
                 "shasum": ""
             },
             "require": {
@@ -924,9 +924,9 @@
             "description": "The official PHP SDK for IntaSend Payment Gateway",
             "support": {
                 "issues": "https://github.com/IntaSend/intasend-php/issues",
-                "source": "https://github.com/IntaSend/intasend-php/tree/v1.0.2"
+                "source": "https://github.com/IntaSend/intasend-php/tree/dev"
             },
-            "time": "2022-01-28T12:44:58+00:00"
+            "time": "2022-02-01T10:23:08+00:00"
         },
         {
             "name": "laravel/framework",
@@ -7423,7 +7423,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "intasend/intasend-php": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
