@@ -35,14 +35,15 @@ Route::get('/checkout', function () {
     $amount = 10;
     $currency = "KES";
 
-    // Add redirect url where the user will be redirected on success
+    // Add your website and redirect url where the user will be redirected on success
+    $host = "https://example.com";
     $redirect_url = "https://example.com/callback";
     $ref_order_number = "test-order-10";
 
 
     $checkout = new Checkout();
     $checkout->init($credentials);
-    $resp = $checkout->create($amount = $amount, $currency = $currency, $customer = $customer, $redirect_url = $redirect_url, $api_ref = $ref_order_number, $comment = null, $method = null);
+    $resp = $checkout->create($amount = $amount, $currency = $currency, $customer = $customer, $host=$host, $redirect_url = $redirect_url, $api_ref = $ref_order_number, $comment = null, $method = null);
 
     return redirect($resp->url);
 });
