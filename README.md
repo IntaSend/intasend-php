@@ -4,6 +4,12 @@
 
 ## Official documentation
 
+PHP SDK for [IntaSend Payment Gateway](https://intasend.com). IntaSend enables you to easily add payments to your application with a few lines of code.
+
+Follow the instruction below to install and get started.
+
+Visit our [sandbox/developers](https://sandbox.intasend.com) test for your API Keys.
+
 Checkout our [API documentation](https://developers.intasend.com/) for more details and for payload references.
 
 ## How to install
