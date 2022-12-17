@@ -22,9 +22,6 @@ IntaSend-php supports various IntaSend's payment features. Below are the credent
 
 **token** - Is the API token and is required for status checks, chargeback request, send money, and wallet services.
 **publishable_key** - Also know as the public key is required during payment collections/checkout only.
-**private_key** - Is required for PSD2 requests i.e during send money requests.
-
-If you want to only collect funds and verify its status, you do not need to generate and include the private key.
 
 ### How to pass your credentials
 
@@ -33,9 +30,6 @@ Add your credentials from the `.env` (recommended) in an array and include it in
     $credentials = [
         'token'=>'<YOUR-TOKEN-HERE>',
         'publishable_key'=>'<YOUR-PUBLISHABLE_KEY-HERE>',
-        'private_key'=><<<EOD
-        <YOUR-PRIVATE_KEY>
-        EOD,
         'test'=>true,
     ];
 
@@ -159,10 +153,8 @@ Examples on how to process refunds using the API
 
     $transfer = new Transfer();
     $transfer->init($credentials);
-
-***device_id - Note device id is the PSD2 device id from the dashboard - <https://developers.intasend.com/apis/extra-payment-authentication>**
  
-    $response=$transfer->mpesa('<DEVICE-ID>', "KES",$transactions);
+    $response=$transfer->mpesa("KES", $transactions);
 
     //call approve() method for approving last transaction
     $response = $transfer->approve($response);
