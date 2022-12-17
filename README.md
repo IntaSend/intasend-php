@@ -50,7 +50,6 @@ Below is a basic example on how to set up. Check full example in your [Laravel p
         function charge() {
             $credentials = [
                 'publishable_key' =>  env('INTASEND_PUBLISHABLE_KEY'),
-                'token' =>  env('INTASEND_API_KEY'),
                 'test' =>  env('INTASEND_TEST_ENVIRONMENT', true),
             ];
 
