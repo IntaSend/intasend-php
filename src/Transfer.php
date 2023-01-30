@@ -62,5 +62,10 @@ class Transfer
         $provider = "PESALINK";
         return $this->send_money($provider, $currency, $transactions, $callback_url=null);
     }
-
+    
+    public function airtime($currency, $transactions, $callback_url=null)
+    {
+        $provider = "AIRTIME";
+        return $this->send_money($provider, $currency, $transactions, $callback_url=null);
+    }
 }
