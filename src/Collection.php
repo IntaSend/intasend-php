@@ -25,7 +25,7 @@ class Collection
             'email'=> $email,
         ];
         $payload=json_encode($payload);
-        return $this->send_request('POST','/payment/collection/',$payload);
+        return $this->send_request('POST','/payment/mpesa-stk-push/',$payload);
     }
 
     public function status($invoice_id)
