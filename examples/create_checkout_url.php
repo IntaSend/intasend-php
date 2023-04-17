@@ -7,7 +7,7 @@ use IntaSend\IntaSendPHP\Checkout;
 use IntaSend\IntaSendPHP\Customer;
 
 $credentials = [
-    'publishable_key' => 'ISPubKey_test_91ffc81a-8ac4-419e-8008-7091caa8d73f'
+    'publishable_key' => 'ADD-YOUR-KEY-FROM-SANDBOX.INTASEND.COM'
 ];
 
 $customer = new Customer();
