@@ -14,7 +14,7 @@ class Wallet
 
     public function details($wallet_id)
     {
-        return $this->send_request('GET','/wallets/'.$wallet_id);
+        return $this->send_request('GET','/wallets/'.$wallet_id.'/');
     }
 
     public function create($currency, $label, $can_disburse=false)
@@ -38,7 +38,7 @@ class Wallet
 
     public function transactions($wallet_id)
     {
-        return $this->send_request('GET','/wallets/'.$wallet_id.'/transactions');
+        return $this->send_request('GET','/wallets/'.$wallet_id.'/transactions/');
     }
 
     public function intra_transfer( $origin_id, $destination_id, $amount, $narrative)

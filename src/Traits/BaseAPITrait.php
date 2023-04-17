@@ -10,10 +10,7 @@ trait BaseAPITrait
 
     private function base_url()
     {
-        if ($this->credentials['test'] === true) {
-            return 'https://sandbox.intasend.com/api/v1';
-        }
-        return 'https://payment.intasend.com/api/v1';
+        return 'https://api.intasend.com/api/v1';
     }
 
     private function send_request($method, $url, $payload = null)

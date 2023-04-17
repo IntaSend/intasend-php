@@ -29,14 +29,12 @@ Add your credentials from the `.env` (recommended) in an array and include it in
 
     $credentials = [
         'token'=>'<YOUR-TOKEN-HERE>',
-        'publishable_key'=>'<YOUR-PUBLISHABLE_KEY-HERE>',
-        'test'=>true,
+        'publishable_key'=>'<YOUR-PUBLISHABLE_KEY-HERE>'
     ];
 
     $checkout = new Checkout();
     $checkout->init($credentials);
 
-In the credentials array, remember to set `test` to `true` for the sandbox environment. Set this flag to `false` when going live
 
 ## How to receive payments using Checkout URL
 
@@ -49,8 +47,7 @@ Below is a basic example on how to set up. Check full example in your [Laravel p
 
         function charge() {
             $credentials = [
-                'publishable_key' =>  env('INTASEND_PUBLISHABLE_KEY'),
-                'test' =>  env('INTASEND_TEST_ENVIRONMENT', true),
+                'publishable_key' =>  env('INTASEND_PUBLISHABLE_KEY')
             ];
 
             $customer = new Customer();
