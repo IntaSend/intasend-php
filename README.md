@@ -46,7 +46,7 @@ Below is a basic example on how to set up. Check full example in your [Laravel p
     use IntaSend\IntaSendPHP\Customer;
 
     $credentials = [
-        'publishable_key' =>  env('INTASEND_PUBLISHABLE_KEY')
+        'publishable_key' =>  'INTASEND_PUBLISHABLE_KEY'
     ];
 
     $customer = new Customer();
@@ -80,7 +80,7 @@ Checkout API generates a URL that enables you to do M-Pesa collection and other 
     use IntaSend\IntaSendPHP\Collection;
 
     $credentials = [
-        'publishable_key' =>  env('INTASEND_PUBLISHABLE_KEY')
+        'publishable_key' =>  'INTASEND_PUBLISHABLE_KEY'
     ];
 
     $collection = new Collection();
