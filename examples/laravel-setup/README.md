@@ -28,8 +28,7 @@ Use it in route i.e where users can generate the check-out url
     Route::get('/checkout', function () {
         $credentials = [
             'publishable_key' =>  env('INTASEND_PUBLISHABLE_KEY'),
-            'token' =>  env('INTASEND_API_KEY'),
-            'test' =>  env('INTASEND_TEST_ENVIRONMENT', true),
+            'token' =>  env('INTASEND_API_KEY')
         ];
 
         $customer = new Customer();

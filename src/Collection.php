@@ -12,9 +12,9 @@ class Collection
         $this->credentials=$credentials;
     }
 
-    public function create($amount, $phone_number, $currency="KES", $method="MPESA-STK-PUSH", $api_ref="API Request", $name=null, $email=null)
+    public function create($amount, $phone_number, $currency="KES", $method="MPESA_STK_PUSH", $api_ref="API Request", $name=null, $email=null)
     {
-        if ($method == 'MPESA-STK-PUSH') {
+        if ($method == 'MPESA_STK_PUSH') {
             $payload=[
                 'public_key'=> $this->credentials['publishable_key'],
                 'currency'=> $currency,
@@ -35,7 +35,7 @@ class Collection
      * Shortcut method to send MPesa STK Push request
      */
     public function mpesa_stk_push($amount, $phone_number, $api_ref="API Request", $name=null, $email=null) {
-        return $this->create($amount, $phone_number, "KES", "MPESA-STK-PUSH", $api_ref, $name, $email);
+        return $this->create($amount, $phone_number, "KES", "MPESA_STK_PUSH", $api_ref, $name, $email);
     }
 
     public function status($invoice_id)
