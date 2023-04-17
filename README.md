@@ -171,7 +171,7 @@ To send money to M-Pesa PayBills, specify business number under account and an a
     ];
 
     $transactions = [
-        ['account'=>'247247', 'account_reference'=>'1001200010',  'amount'=>'2000', 'narrative'=>'Trip']
+        ['account'=>'247247', 'account_type'=>'PayBill', 'account_reference'=>'1001200010',  'amount'=>'2000', 'narrative'=>'Trip']
     ];
 
     $transfer = new Transfer();
@@ -195,7 +195,7 @@ To send money to Till Numbers, simply specify the account number. No account ref
     ];
 
     $transactions = [
-        ['account'=>'5002901', 'amount'=>'2000', 'narrative'=>'Trip']
+        ['account'=>'5002901', 'account_type'=>'TillNumber', 'amount'=>'2000', 'narrative'=>'Trip']
     ];
 
     $transfer = new Transfer();
