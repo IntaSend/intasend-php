@@ -44,6 +44,9 @@ class Collection
             'public_key'=> $this->credentials['publishable_key'],
             'invoice_id'=> $invoice_id,
         ];
+        if (isset($this->credentials['token'])) {
+            $this->credentials['token'] = null;
+        }
         $payload=json_encode($payload);
         return $this->send_request('POST','/payment/status/',$payload);
     }

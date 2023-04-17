@@ -45,35 +45,33 @@ Below is a basic example on how to set up. Check full example in your [Laravel p
         use IntaSend\IntaSendPHP\Checkout;
         use IntaSend\IntaSendPHP\Customer;
 
-        function charge() {
-            $credentials = [
-                'publishable_key' =>  env('INTASEND_PUBLISHABLE_KEY')
-            ];
+        $credentials = [
+            'publishable_key' =>  env('INTASEND_PUBLISHABLE_KEY')
+        ];
 
-            $customer = new Customer();
-            $customer->first_name = "Joe";
-            $customer->last_name = "Doe";
-            $customer->email = "joe@doe.com";
-            $customer->country = "KE";
-            $customer->city = "Nairobi";
-            $customer->address = "Apt 123, Westland road";
-            $customer->zipcode = "0100";
-            $customer->state = "Nairobi";
+        $customer = new Customer();
+        $customer->first_name = "Joe";
+        $customer->last_name = "Doe";
+        $customer->email = "joe@doe.com";
+        $customer->country = "KE";
+        $customer->city = "Nairobi";
+        $customer->address = "Apt 123, Westland road";
+        $customer->zipcode = "0100";
+        $customer->state = "Nairobi";
 
-            $amount = 10;
-            $currency = "KES";
+        $amount = 10;
+        $currency = "KES";
 
-            // Add your website and redirect url where the user will be redirected on success
-            $host = "https://example.com";
-            $redirect_url = "https://example.com/callback";
-            $ref_order_number = "test-order-10";
+        // Add your website and redirect url where the user will be redirected on success
+        $host = "https://example.com";
+        $redirect_url = "https://example.com/callback";
+        $ref_order_number = "test-order-10";
 
-            $checkout = new Checkout();
-            $checkout->init($credentials);
-            $resp = $checkout->create($amount = $amount, $currency = $currency, $customer = $customer, $host=$host, $redirect_url = $redirect_url, $api_ref = $ref_order_number, $comment = null, $method = null);
+        $checkout = new Checkout();
+        $checkout->init($credentials);
+        $resp = $checkout->create($amount = $amount, $currency = $currency, $customer = $customer, $host=$host, $redirect_url = $redirect_url, $api_ref = $ref_order_number, $comment = null, $method = null);
 
-            print_r($resp->url);
-        }
+        print_r($resp->url);
 
 ## Send M-Pesa STK-Push
 
@@ -94,8 +92,9 @@ Checkout API generates a URL that enables you to do M-Pesa collection and other 
     $response = $collection->mpesa_stk_push($amount, $phone_number, $api_ref);
     print_r($response);
 
-    $invoice_id = $response->invoice_id;
-    $response = $collection->status($invoice_id)
+    $invoice = $response->invoice;
+    $invoice_id = $invoice->invoice_id;
+    $response = $collection->status($invoice_id);
     print_r($response);
 
 ## How to create Payment links
@@ -157,6 +156,10 @@ Payment links are free forms that you can share with your customers on email and
 
     //call approve method for approving last transaction
     $response = $transfer->approve($response);
+    print_r($response);
+
+    // How to check or track the transfer status
+    $response = $transfer->status($response->tracking_id);
     print_r($response);
 
 ## How to Send Money to M-Pesa PayBill

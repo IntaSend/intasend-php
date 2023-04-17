@@ -9,7 +9,7 @@ class PaymentLink
 
     public function init($credentials)
     {
-        $this->credentials=$credentials;
+        $this->credentials = $credentials;
     }
 
     public function create($title, $currency, $amount=0, $mobile_tarrif="BUSINESS-PAYS", $card_tarrif="BUSINESS-PAYS", $is_active=True)
