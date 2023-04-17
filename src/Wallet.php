@@ -14,7 +14,7 @@ class Wallet
 
     public function details($wallet_id)
     {
-        return $this->send_request('GET','/wallets/'.$wallet_id);
+        return $this->send_request('GET','/wallets/'.$wallet_id.'/');
     }
 
     public function create($currency, $label, $can_disburse=false)
@@ -38,7 +38,7 @@ class Wallet
 
     public function transactions($wallet_id)
     {
-        return $this->send_request('GET','/wallets/'.$wallet_id.'/transactions');
+        return $this->send_request('GET','/wallets/'.$wallet_id.'/transactions/');
     }
 
     public function intra_transfer( $origin_id, $destination_id, $amount, $narrative)
@@ -52,10 +52,11 @@ class Wallet
         return $this->send_request('POST','/wallets/'.$origin_id.'/intra_transfer/',$payload);
     }
 
-    public function fund($phone_number, $email=null, $amount, $method, $currency="KES", $api_ref="API Request", $name=null)
+    public function fund($phone_number, $email=null, $amount, $method="MPESA_STK_PUSH", $currency="KES", $api_ref="API Request", $name=null)
     {
         $collection=new Collection();
-        return $collection->create($this->credentials['publishable_key'],$currency,$method,$amount,$phone_number,$api_ref,$name,$email);
+        $collection->init($this->credentials);
+        return $collection->create($amount, $phone_number, $currency, $method, $api_ref, $name, $email);
     }
 
 }

@@ -36,7 +36,8 @@ class Transfer
         $payload=[
             'tracking_id'=> $tracking_id,
         ];
-        return $this->send_request('POST','/send-money/status/',$payload);
+        $payload=json_encode($payload);
+        return $this->send_request('POST','/send-money/status/', $payload);
     }
 
     public function mpesa($currency, $transactions, $callback_url=null)
