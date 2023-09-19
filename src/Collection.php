@@ -12,7 +12,7 @@ class Collection
         $this->credentials=$credentials;
     }
 
-    public function create($amount, $phone_number, $currency="KES", $method="MPESA_STK_PUSH", $api_ref="API Request", $name=null, $email=null)
+    public function create($amount, $phone_number, $currency="KES", $method="MPESA_STK_PUSH", $api_ref="API Request", $name=null, $email=null, $wallet_id=null)
     {
         if ($method == 'MPESA_STK_PUSH') {
             $payload=[
@@ -24,6 +24,7 @@ class Collection
                 'name'=> $name,
                 'phone_number'=> $phone_number,
                 'email'=> $email,
+                'wallet_id'=>$wallet_id
             ];
             $payload=json_encode($payload);
             return $this->send_request('POST','/payment/mpesa-stk-push/',$payload);

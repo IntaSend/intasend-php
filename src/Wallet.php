@@ -52,11 +52,19 @@ class Wallet
         return $this->send_request('POST','/wallets/'.$origin_id.'/intra_transfer/',$payload);
     }
 
-    public function fund($phone_number, $email=null, $amount, $method="MPESA_STK_PUSH", $currency="KES", $api_ref="API Request", $name=null)
+    public function fund_mpesa_stk_push($wallet_id, $phone_number, $email=null, $amount, $api_ref="API Request", $name=null)
     {
         $collection=new Collection();
         $collection->init($this->credentials);
-        return $collection->create($amount, $phone_number, $currency, $method, $api_ref, $name, $email);
+        return $collection->create($amount=$amount, $phone_number=$phone_number, $currency="KES", $method="MPESA_STK_PUSH", $api_ref="API Request", $name=null, $email=null, $wallet_id=$wallet_id);
+    }
+
+    public function fund_checkout($wallet_id, $currency, $customer, $amount, $host, $redirect_url=null, $api_ref="API Request", $name=null, $card_tarrif = "BUSINESS-PAYS", $mobile_tarrif = "BUSINESS-PAYS"){
+        $checkout = new Checkout();
+        $checkout->init($this->credentials);
+
+        return $checkout->create($amount = $amount, $currency = $currency, $customer = $customer, $host=$host, $redirect_url = $redirect_url, $api_ref = $api_ref, $comment = null, $method = null, $card_tarrif = "BUSINESS-PAYS", $mobile_tarrif = "BUSINESS-PAYS", $wallet_id=$wallet_id);
+
     }
 
 }
