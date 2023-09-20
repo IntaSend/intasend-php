@@ -40,33 +40,33 @@ class Transfer
         return $this->send_request('POST','/send-money/status/', $payload);
     }
 
-    public function mpesa($currency, $transactions, $callback_url=null)
+    public function mpesa($currency, $transactions, $callback_url=null, $wallet_id=null)
     {
         $provider = "MPESA-B2C";
-        return $this->send_money($provider, $currency, $transactions, $callback_url=null);
+        return $this->send_money($provider, $currency, $transactions, $callback_url=$callback_url, $wallet_id=$wallet_id);
     }
 
-    public function mpesa_b2b($currency, $transactions, $callback_url=null)
+    public function mpesa_b2b($currency, $transactions, $callback_url=null, $wallet_id=null)
     {
         $provider = "MPESA-B2B";
-        return $this->send_money($provider, $currency, $transactions, $callback_url=null);
+        return $this->send_money($provider, $currency, $transactions, $callback_url=$callback_url, $wallet_id=$wallet_id);
     }
 
-    public function intasend($currency, $transactions, $callback_url=null)
+    public function intasend($currency, $transactions, $callback_url=null, $wallet_id=null)
     {
         $provider = "INTASEND";
-        return $this->send_money($provider, $currency, $transactions, $callback_url=null);
+        return $this->send_money($provider, $currency, $transactions, $callback_url=$callback_url, $wallet_id=$wallet_id);
     }
 
-    public function bank($currency, $transactions, $callback_url=null)
+    public function bank($currency, $transactions, $callback_url=null, $wallet_id=null)
     {
         $provider = "PESALINK";
-        return $this->send_money($provider, $currency, $transactions, $callback_url=null);
+        return $this->send_money($provider, $currency, $transactions, $callback_url=$callback_url, $wallet_id=$wallet_id);
     }
     
-    public function airtime($currency, $transactions, $callback_url=null)
+    public function airtime($currency, $transactions, $callback_url=null, $wallet_id=null)
     {
         $provider = "AIRTIME";
-        return $this->send_money($provider, $currency, $transactions, $callback_url=null);
+        return $this->send_money($provider, $currency, $transactions, $callback_url=$callback_url, $wallet_id=$wallet_id);
     }
 }
