@@ -54,12 +54,12 @@ trait BaseAPITrait
         throw new \Exception('Invalid tokens provided. We could not identify the target enviroment for this request');
     }
 
-    private function send_request($method, $url, $payload = null)
+    private function send_request($method, $url, $payload = null, $auth= true)
     {
         $headers = [
             'Content-Type' => 'application/json'
         ];
-        if (isset($this->credentials['token'])) {
+        if (isset($this->credentials['token']) && $auth) {
             $headers = [
                 'Authorization' => 'Bearer ' . $this->credentials['token'],
                 'Content-Type' => 'application/json'
