@@ -39,7 +39,7 @@ class Checkout
             "wallet_id"=> $wallet_id
         ];
         $payload = json_encode($payload);
-        return $this->send_request('POST', '/checkout/', $payload);
+        return $this->send_request($method='POST', $url='/checkout/', $payload=$payload, $auth=false);
     }
 
     public function check_status($signature, $checkout_id, $invoice_id)
