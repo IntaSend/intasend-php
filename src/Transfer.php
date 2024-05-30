@@ -12,11 +12,12 @@ class Transfer
         $this->credentials=$credentials;
     }
 
-    public function send_money($provider, $currency, $transactions, $callback_url=null, $wallet_id=null)
+    public function send_money($provider, $currency, $transactions, $callback_url=null, $wallet_id=null, $requires_approval='YES')
     {
         $payload=[
             'provider'=> $provider,
             'currency'=> $currency,
+            'requires_approval'=>$requires_approval,
             'transactions'=> $transactions,
             'callback_url'=> $callback_url,
             'wallet_id' => $wallet_id
@@ -40,33 +41,33 @@ class Transfer
         return $this->send_request('POST','/send-money/status/', $payload);
     }
 
-    public function mpesa($currency, $transactions, $callback_url=null, $wallet_id=null)
+    public function mpesa($currency, $transactions, $requires_approval='YES', $callback_url=null, $wallet_id=null)
     {
         $provider = "MPESA-B2C";
-        return $this->send_money($provider, $currency, $transactions, $callback_url=$callback_url, $wallet_id=$wallet_id);
+        return $this->send_money($provider, $currency, $transactions, $callback_url=$callback_url, $wallet_id=$wallet_id, $requires_approval=$requires_approval);
     }
 
-    public function mpesa_b2b($currency, $transactions, $callback_url=null, $wallet_id=null)
+    public function mpesa_b2b($currency, $transactions, $requires_approval='YES', $callback_url=null, $wallet_id=null)
     {
         $provider = "MPESA-B2B";
-        return $this->send_money($provider, $currency, $transactions, $callback_url=$callback_url, $wallet_id=$wallet_id);
+        return $this->send_money($provider, $currency, $transactions, $callback_url=$callback_url, $wallet_id=$wallet_id, $requires_approval=$requires_approval);
     }
 
-    public function intasend($currency, $transactions, $callback_url=null, $wallet_id=null)
+    public function intasend($currency, $transactions, $requires_approval='YES', $callback_url=null, $wallet_id=null)
     {
         $provider = "INTASEND";
-        return $this->send_money($provider, $currency, $transactions, $callback_url=$callback_url, $wallet_id=$wallet_id);
+        return $this->send_money($provider, $currency, $transactions, $callback_url=$callback_url, $wallet_id=$wallet_id, $requires_approval=$requires_approval);
     }
 
-    public function bank($currency, $transactions, $callback_url=null, $wallet_id=null)
+    public function bank($currency, $transactions, $requires_approval='YES', $callback_url=null, $wallet_id=null)
     {
         $provider = "PESALINK";
-        return $this->send_money($provider, $currency, $transactions, $callback_url=$callback_url, $wallet_id=$wallet_id);
+        return $this->send_money($provider, $currency, $transactions, $callback_url=$callback_url, $wallet_id=$wallet_id, $requires_approval=$requires_approval);
     }
     
-    public function airtime($currency, $transactions, $callback_url=null, $wallet_id=null)
+    public function airtime($currency, $transactions, $requires_approval='YES', $callback_url=null, $wallet_id=null)
     {
         $provider = "AIRTIME";
-        return $this->send_money($provider, $currency, $transactions, $callback_url=$callback_url, $wallet_id=$wallet_id);
+        return $this->send_money($provider, $currency, $transactions, $callback_url=$callback_url, $wallet_id=$wallet_id, $requires_approval=$requires_approval);
     }
 }
