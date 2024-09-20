@@ -26,7 +26,7 @@ class Chagebacks
 
     public function retrieve($chargeback_id=null){
         if ($chargeback_id) {
-           return $this->details($chargeback_id);
+            return $this->details($chargeback_id);
         }
         return $this->send_request('GET','/chargebacks/');
     }

@@ -28,7 +28,7 @@ class PaymentLink
 
     public function retrieve($link_id=null){
         if ($link_id) {
-           return $this->details($link_id);
+            return $this->details($link_id);
         }
         return $this->send_request('GET','/paymentlinks/');
     }

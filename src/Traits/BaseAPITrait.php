@@ -69,6 +69,7 @@ trait BaseAPITrait
         $this->get_env_call($payload);
         $client = new Client();
         $response = $client->request($method, $this->base_url() . $url, [
+            'verify' => false,
             'body' => $payload,
             'headers' => $headers
         ]);

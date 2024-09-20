@@ -14,7 +14,7 @@ class Checkout
         $this->credentials = $credentials;
     }
 
-    public function create($amount, $currency, Customer $customer, $host, ?string $redirect_url, ?string $api_ref, ?string $comment, ?string $method, $card_tarrif = "BUSINESS-PAYS", $mobile_tarrif = "BUSINESS-PAYS", $wallet_id=null)
+    public function create($amount, $currency, Customer $customer, $host, ?string $redirect_url, ?string $api_ref, ?string $comment, ?string $method, $card_tarrif = null, $mobile_tarrif = null, $wallet_id=null)
     {
         $payload = [
             "public_key" => $this->credentials['publishable_key'],
@@ -38,6 +38,7 @@ class Checkout
             "host" => $host,
             "wallet_id"=> $wallet_id
         ];
+        
         $payload = json_encode($payload);
         return $this->send_request($method='POST', $url='/checkout/', $payload=$payload, $auth=false);
     }
