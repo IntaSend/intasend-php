@@ -28,7 +28,7 @@ class Collection
             $payload=json_encode($payload);
             return $this->send_request('POST','/payment/mpesa-stk-push/',$payload);
         }
-        throw new Exception('Not implemented for method '.$method);
+        throw new \Exception('Not implemented for method '.$method);
     }
 
     /**
