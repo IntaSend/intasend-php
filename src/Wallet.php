@@ -52,7 +52,7 @@ class Wallet
         return $this->send_request('POST','/wallets/'.$origin_id.'/intra_transfer/',$payload);
     }
 
-    public function fund_mpesa_stk_push($wallet_id, $phone_number, $email=null, $amount, $api_ref="API Request")
+    public function fund_mpesa_stk_push($wallet_id, $phone_number, $email=null, $amount, $api_ref="API Request",)
     {
         $collection=new Collection();
         $collection->init($this->credentials);
